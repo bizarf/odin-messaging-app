@@ -1,0 +1,42 @@
+{
+    "name": "odin-messaging-app-api",
+    "version": "1.0.0",
+    "author": "Tony Hoong (https://github.com/bizarf)",
+    "engines": {
+        "node": "20.9.0"
+    },
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "test": "mocha --recursive --timeout 5000",
+        "devstart": "nodemon ./bin/www",
+        "serverstart": "DEBUG=odin-book-api:* npm run devstart"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "compression": "^1.7.4",
+        "cookie-parser": "~1.4.6",
+        "cors": "^2.8.5",
+        "debug": "~4.3.4",
+        "dotenv": "^16.3.1",
+        "express": "~4.18.2",
+        "express-async-handler": "^1.2.0",
+        "express-rate-limit": "^7.1.3",
+        "express-session": "^1.17.3",
+        "express-validator": "^7.0.1",
+        "helmet": "^7.0.0",
+        "http-errors": "~2.0.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.0.0",
+        "morgan": "~1.10.0",
+        "passport": "^0.6.0",
+        "passport-jwt": "^4.0.1",
+        "passport-local": "^1.0.0"
+    },
+    "devDependencies": {
+        "chai": "^4.3.10",
+        "mocha": "^10.2.0",
+        "mongodb-memory-server": "^9.0.1",
+        "supertest": "^6.3.3"
+    }
+}
