@@ -6,6 +6,8 @@ const UserSchema = new Schema({
     displayName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    joinDate: { type: Date, required: true, default: Date.now() },
+    avatar: { type: String, default: "" },
 });
 
 module.exports = mongoose.model("User", UserSchema);

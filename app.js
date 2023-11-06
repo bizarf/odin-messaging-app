@@ -11,11 +11,21 @@ const helmet = require("helmet");
 const indexRouter = require("./routes/index");
 const welcomeRouter = require("./routes/welcomeRoute");
 const userRouter = require("./routes/userRoute");
+const authRouter = require("./routes/authRoute");
 
 const app = express();
 
 // dotenv init
 require("dotenv").config();
+// import the passport js config
+
+// import the connect to database function after dotenv init or else it won't be able to access the env variables
+const { connectToDatabase } = require("./middleware/mongoConfig");
+
+// connect to database
+connectToDatabase().then(() => {
+    console.log("Database connected");
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -40,7 +50,8 @@ app.use(limiter);
 // api routes
 app.use("/", indexRouter);
 app.use("/api", welcomeRouter);
-app.use("/api", userRouter);
+app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -55,7 +66,7 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render("error");
+    res.send("error");
 });
 
 module.exports = app;
