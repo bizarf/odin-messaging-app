@@ -6,6 +6,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const compression = require("compression");
 const helmet = require("helmet");
+const session = require("express-session");
 
 // api route imports
 const indexRouter = require("./routes/index");
@@ -18,7 +19,7 @@ const app = express();
 // dotenv init
 require("dotenv").config();
 // import the passport js config
-
+require("./middleware/passportConfig");
 // import the connect to database function after dotenv init or else it won't be able to access the env variables
 const { connectToDatabase } = require("./middleware/mongoConfig");
 
@@ -26,6 +27,22 @@ const { connectToDatabase } = require("./middleware/mongoConfig");
 connectToDatabase().then(() => {
     console.log("Database connected");
 });
+
+// init session, passport, and passport session
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            // secure: true
+            sameSite: "none",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        },
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger("dev"));
 app.use(express.json());

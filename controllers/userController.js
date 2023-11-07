@@ -2,7 +2,6 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
-const passport = require("passport");
 
 // user sign up post
 exports.user_signup_post = [

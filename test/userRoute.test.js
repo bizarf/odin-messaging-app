@@ -1,8 +1,8 @@
 const supertest = require("supertest");
-// const userRoute = require("../routes/userRoute");
-// const express = require("express");
-// const app = express();
-const app = require("../app");
+const userRoute = require("../routes/userRoute");
+const express = require("express");
+const app = express();
+// const app = require("../app");
 const request = supertest(app);
 const { expect } = require("chai");
 const {
@@ -10,8 +10,8 @@ const {
     disconnectDatabase,
 } = require("../middleware/mongoConfig");
 
-// app.use(express.json());
-// app.use("/api/user", userRoute);
+app.use(express.json());
+app.use("/api/user", userRoute);
 
 describe("user sign up tests", () => {
     before(async () => {
